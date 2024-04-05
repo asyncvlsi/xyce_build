@@ -1,0 +1,9 @@
+[submodule "Xyce"]
+	path = Xyce
+	url = https://github.com/asyncvlsi/Xyce
+[submodule "trilinos"]
+	path = trilinos
+	url = https://github.com/trilinos/trilinos
+[submodule "SuiteSparse"]
+	path = SuiteSparse
+	url = https://github.com/DrTimothyAldenDavis/SuiteSparse
