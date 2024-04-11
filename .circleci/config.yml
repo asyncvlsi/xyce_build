@@ -1,0 +1,26 @@
+version: 2
+
+jobs:
+   ubuntu22:
+     # Ubuntu 22
+     docker:
+       - image: ubuntu:22.04
+     steps:
+       - checkout
+       - run:
+          name: Dependencies
+          command: |
+              apt-get -q update -y
+              DEBIAN_FRONTEND=noninteractive apt-get -q install -y zlib1g-dev m4 build-essential git terminfo bison flex
+       - run:
+          name: Build
+          command: |
+              export ACT_HOME=`pwd`/install
+              export PATH=$ACT_HOME/bin:$PATH
+              ./build.sh
+
+workflows:
+   version: 2
+   build:
+     jobs:
+        - ubuntu22
