@@ -21,6 +21,22 @@ then
 	exit 1
 fi
 
+case `uname -s` in
+Darwin|darwin) flex_odd=1;;
+*) flex_odd=0;;
+esac
+
+# check for weird mac issue
+if [ $flex_odd -eq 1 ]
+then
+	res=`find /Applications/Xcode.app/Contents/Developer/Toolchains/ -name FlexLexer.h 2>/dev/null | sed 's/\(.*\)FlexLexer.h/\1/'`
+	if [ "x$res" = "x" ]
+	then
+		flexdir=
+	else
+		flexdir="-DFLEX_INCLUDE_DIR=$res"
+	fi
+fi
 
 echo "*** Build/install SuiteSparse ***"
 (cd SuiteSparse && \
@@ -74,5 +90,5 @@ echo "*** Build/install Xyce ***"
 (cd Xyce &&
  if [ ! -d build ]; then mkdir build; fi && \
  cd build &&
- cmake -DCMAKE_INSTALL_PREFIX=$ACT_HOME .. && \
+ cmake -DCMAKE_INSTALL_PREFIX=$ACT_HOME $flexdir .. && \
  make && make xycecinterface && make install || exit 1)
