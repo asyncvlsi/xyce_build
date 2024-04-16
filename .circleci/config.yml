@@ -11,7 +11,7 @@ jobs:
           name: Dependencies
           command: |
               apt-get -q update -y
-              DEBIAN_FRONTEND=noninteractive apt-get -q install -y zlib1g-dev m4 build-essential git terminfo bison flex cmake
+              DEBIAN_FRONTEND=noninteractive apt-get -q install -y zlib1g-dev m4 build-essential git terminfo bison flex wget
        - run:
           name: Build
           command: |

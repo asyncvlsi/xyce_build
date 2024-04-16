@@ -38,6 +38,9 @@ then
 	fi
 fi
 
+echo "*** Build and install cmake ***"
+./build_cmake.sh
+
 echo "*** Build/install SuiteSparse ***"
 (cd SuiteSparse && \
  if [ ! -d build ]; then mkdir build; fi && \
