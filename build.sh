@@ -83,6 +83,8 @@ echo "*** Build/install Trilinos with Xyce options ***"
 -DTrilinos_ENABLE_Kokkos=ON \
 -DTrilinos_ENABLE_ALL_OPTIONAL_PACKAGES=OFF \
 -DTrilinos_ENABLE_CXX11=ON \
+-DAMD_LIBRARY_DIRS=$ACT_HOME/lib \
+-DTPL_AMD_INCLUDE_DIRS=$ACT_HOME/include \
 -DTPL_ENABLE_AMD=ON \
 -DTPL_ENABLE_BLAS=ON \
 -DTPL_ENABLE_LAPACK=ON \
