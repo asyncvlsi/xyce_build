@@ -48,6 +48,8 @@ echo "*** Build/install SuiteSparse ***"
  cmake -DCMAKE_INSTALL_PREFIX=$ACT_HOME -DSUITESPARSE_ENABLE_PROJECTS="suitesparse_config;amd" .. && \
  make && make install || exit 1)
 
+(cd $ACT_HOME/include; ln -s suitesparse/* .)
+
 echo "*** Build/install Trilinos with Xyce options ***"
 
 (cd trilinos && \
