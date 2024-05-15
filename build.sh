@@ -91,11 +91,11 @@ echo "*** Build/install Trilinos with Xyce options ***"
 -DTPL_ENABLE_BLAS=ON \
 -DTPL_ENABLE_LAPACK=ON \
  .. && \
- make && make install || exit 1)
+ make -j && make install || exit 1)
 
 echo "*** Build/install Xyce ***"
 (cd Xyce &&
  if [ ! -d build ]; then mkdir build; fi && \
  cd build &&
  cmake -DCMAKE_INSTALL_PREFIX=$ACT_HOME $flexdir .. && \
- make && make xycecinterface && make install || exit 1)
+ make -j && make xycecinterface && make install || exit 1)
