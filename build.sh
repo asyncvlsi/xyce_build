@@ -1,7 +1,13 @@
 #!/bin/sh
 
+if [ -z ${XYCE_INSTALL+x} ]
+then
+   XYCE_INSTALL=${ACT_HOME}
+fi
+
 echo
-echo "Building Xyce and installing it in the ACT_HOME directory."
+echo "Building+installing Xyce."
+echo "  install dir: XYCE_INSTALL ($XYCE_INSTALL)"
 echo
 echo "Xyce needs flex and bison; make sure you have those setup"
 echo "on your system. Sometimes on MacOS you will need to set"
@@ -45,10 +51,10 @@ echo "*** Build/install SuiteSparse ***"
 (cd SuiteSparse && \
  if [ ! -d build ]; then mkdir build; fi && \
  cd build && \
- cmake -DCMAKE_INSTALL_PREFIX=$ACT_HOME -DSUITESPARSE_ENABLE_PROJECTS="suitesparse_config;amd" .. && \
+ cmake -DCMAKE_INSTALL_PREFIX=$XYCE_INSTALL -DSUITESPARSE_ENABLE_PROJECTS="suitesparse_config;amd" .. && \
  make && make install || exit 1)
 
-(cd $ACT_HOME/include; ln -s suitesparse/* .)
+(cd $XYCE_INSTALL/include; ln -s suitesparse/* .)
 
 echo "*** Build/install Trilinos with Xyce options ***"
 
@@ -61,7 +67,7 @@ echo "*** Build/install Trilinos with Xyce options ***"
 -DCMAKE_CXX_FLAGS="-O3 -fPIC" \
 -DCMAKE_C_FLAGS="-O3 -fPIC" \
 -DCMAKE_Fortran_FLAGS="-O3 -fPIC" \
--DCMAKE_INSTALL_PREFIX=$ACT_HOME \
+-DCMAKE_INSTALL_PREFIX=$XYCE_INSTALL \
 -DCMAKE_MAKE_PROGRAM="make" \
 -DTrilinos_ENABLE_NOX=ON \
   -DNOX_ENABLE_LOCA=ON \
@@ -85,8 +91,8 @@ echo "*** Build/install Trilinos with Xyce options ***"
 -DTrilinos_ENABLE_Kokkos=ON \
 -DTrilinos_ENABLE_ALL_OPTIONAL_PACKAGES=OFF \
 -DTrilinos_ENABLE_CXX11=ON \
--DAMD_LIBRARY_DIRS=$ACT_HOME/lib \
--DTPL_AMD_INCLUDE_DIRS=$ACT_HOME/include \
+-DAMD_LIBRARY_DIRS=$XYCE_INSTALL/lib \
+-DTPL_AMD_INCLUDE_DIRS=$XYCE_INSTALL/include \
 -DTPL_ENABLE_AMD=ON \
 -DTPL_ENABLE_BLAS=ON \
 -DTPL_ENABLE_LAPACK=ON \
@@ -97,5 +103,5 @@ echo "*** Build/install Xyce ***"
 (cd Xyce &&
  if [ ! -d build ]; then mkdir build; fi && \
  cd build &&
- cmake -DCMAKE_INSTALL_PREFIX=$ACT_HOME $flexdir .. && \
+ cmake -DCMAKE_INSTALL_PREFIX=$XYCE_INSTALL $flexdir .. && \
  make -j 3 && make xycecinterface && make install || exit 1)
