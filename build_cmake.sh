@@ -24,11 +24,13 @@ fi
 
 if [ $found -eq 0 ]
 then
-
+if [ ! -f cmake-3.29.2.tar.gz ]
+then
 wget https://github.com/Kitware/CMake/releases/download/v3.29.2/cmake-3.29.2.tar.gz
 tar -xzf cmake-3.29.2.tar.gz
+fi
 cd cmake-3.29.2
-./configure
+./configure --prefix=$XYCE_INSTALL
 make
 make install
 

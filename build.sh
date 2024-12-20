@@ -4,6 +4,7 @@ if [ -z ${XYCE_INSTALL+x} ]
 then
    XYCE_INSTALL=${ACT_HOME}
 fi
+export XYCE_INSTALL
 
 echo
 echo "Building+installing Xyce."
@@ -46,6 +47,8 @@ fi
 
 echo "*** Build and install cmake ***"
 ./build_cmake.sh
+
+export PATH=${XYCE_INSTALL}/bin:${PATH}
 
 echo "*** Build/install SuiteSparse ***"
 (cd SuiteSparse && \
