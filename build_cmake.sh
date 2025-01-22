@@ -30,6 +30,12 @@ wget https://github.com/Kitware/CMake/releases/download/v3.29.2/cmake-3.29.2.tar
 tar -xzf cmake-3.29.2.tar.gz
 fi
 cd cmake-3.29.2
+echo "CMAKE installation: $XYCE_INSTALL"
+if [ -z ${XYCE_INSTALL+x} ]
+then
+   XYCE_INSTALL=${ACT_HOME}
+fi
+echo "CMAKE installation: $XYCE_INSTALL"
 ./configure --prefix=$XYCE_INSTALL
 make
 make install
