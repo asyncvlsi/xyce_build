@@ -50,6 +50,8 @@ echo "*** Build and install cmake ***"
 
 export PATH=${XYCE_INSTALL}/bin:${PATH}
 
+hash -r
+
 echo "*** Build/install SuiteSparse ***"
 (cd SuiteSparse && \
  if [ ! -d build ]; then mkdir build; fi && \
