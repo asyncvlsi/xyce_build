@@ -1,6 +1,3 @@
-[submodule "Xyce"]
-	path = Xyce
-	url = https://github.com/Xyce/Xyce
 [submodule "trilinos"]
 	path = trilinos
 	url = https://github.com/trilinos/trilinos
