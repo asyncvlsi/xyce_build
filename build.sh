@@ -76,6 +76,7 @@ echo "*** Build/install Trilinos with Xyce options ***"
 -DCMAKE_MAKE_PROGRAM="make" \
 -DTrilinos_ENABLE_NOX=ON \
   -DNOX_ENABLE_LOCA=ON \
+-DTrilinos_ENABLE_Epetra=ON \
 -DTrilinos_ENABLE_EpetraExt=ON \
   -DEpetraExt_BUILD_BTF=ON \
   -DEpetraExt_BUILD_EXPERIMENTAL=ON \
@@ -92,6 +93,7 @@ echo "*** Build/install Trilinos with Xyce options ***"
  -DAmesos2_ENABLE_KLU2=ON \
  -DAmesos2_ENABLE_Basker=ON \
 -DTrilinos_ENABLE_Sacado=ON \
+-DTrilinos_ENABLE_Triutils=ON \
 -DTrilinos_ENABLE_Stokhos=ON \
 -DTrilinos_ENABLE_Kokkos=ON \
 -DTrilinos_ENABLE_ALL_OPTIONAL_PACKAGES=OFF \
@@ -108,5 +110,5 @@ echo "*** Build/install Xyce ***"
 (cd Xyce &&
  if [ ! -d build ]; then mkdir build; fi && \
  cd build &&
- cmake -DCMAKE_INSTALL_PREFIX=$XYCE_INSTALL $flexdir .. && \
+ cmake -DCMAKE_INSTALL_PREFIX=$XYCE_INSTALL -DXyce_PLUGIN_SUPPORT=YES $flexdir .. && \
  make -j 3 && make xycecinterface && make install || exit 1)
